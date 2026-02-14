@@ -125,14 +125,4 @@ async def login(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router.get("/me", response_model=UserResponse)
-async def get_current_user(
-    db: AsyncSession = Depends(get_db),
-    # TODO: Add authentication dependency
-):
-    """Get current user information"""
-    # For now, return demo user
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Authentication dependency not yet implemented"
-    )
+# Note: /me endpoint will be implemented in a future PR with authentication middleware

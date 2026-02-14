@@ -66,7 +66,8 @@ fi
 # Test 5: Check database
 echo ""
 echo "5️⃣  Testing database..."
-DB_TEST=$(docker exec backlog-lens_postgres_1 psql -U jira -d jira_intel -c "SELECT COUNT(*) FROM tenants;" 2>&1)
+POSTGRES_CONTAINER=$(docker-compose ps -q postgres)
+DB_TEST=$(docker exec "$POSTGRES_CONTAINER" psql -U jira -d jira_intel -c "SELECT COUNT(*) FROM tenants;" 2>&1)
 if echo "$DB_TEST" | grep -q "count"; then
     echo -e "${GREEN}✓ Database is accessible and initialized${NC}"
 else
